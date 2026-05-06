@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Travel Assistant Learning Demo</title>
+    <link rel="stylesheet" href="/static/app.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="hero-kicker">Learning Demo / FastAPI + LangGraph + MCP</p>
+        <h1>AI Travel Assistant</h1>
+        <p class="hero-copy">
+          这个单页只负责把现有后端能力看清楚：创建旅游规划、补充缺失信息、查看攻略、提交局部反馈。
+        </p>
+      </header>
+
+      <main class="workspace">
+        <section class="panel panel-input">
+          <div class="panel-head">
+            <p class="eyebrow">Control Deck</p>
+            <h2>输入与交互</h2>
+          </div>
+
+          <form id="plan-form" class="stack-form">
+            <label for="request-input">旅游需求</label>
+            <textarea
+              id="request-input"
+              name="request"
+              rows="5"
+              placeholder="例如：我想从北京去上海旅游"
+              required
+            ></textarea>
+            <button type="submit" class="primary-button">创建规划</button>
+          </form>
+
+          <section id="resume-section" class="sub-panel is-hidden">
+            <div class="sub-panel-head">
+              <p class="eyebrow">Need Input</p>
+              <h3>补充信息</h3>
+            </div>
+            <p id="question-text" class="question-box"></p>
+            <form id="resume-form" class="stack-form">
+              <label for="resume-input">补充回答</label>
+              <textarea
+                id="resume-input"
+                name="reply"
+                rows="4"
+                placeholder="例如：2026-05-01出发，2026-05-04返回"
+                required
+              ></textarea>
+              <button type="submit" class="secondary-button">继续生成</button>
+            </form>
+          </section>
+
+          <section id="feedback-section" class="sub-panel is-hidden">
+            <div class="sub-panel-head">
+              <p class="eyebrow">Refine</p>
+              <h3>局部反馈</h3>
+            </div>
+            <form id="feedback-form" class="stack-form">
+              <label for="feedback-input">反馈内容</label>
+              <textarea
+                id="feedback-input"
+                name="feedback"
+                rows="4"
+                placeholder="例如：住宿想更便宜一点，其他不动"
+                required
+              ></textarea>
+              <button type="submit" class="secondary-button">重新规划</button>
+            </form>
+          </section>
+        </section>
+
+        <section class="panel panel-output">
+          <div class="panel-head">
+            <p class="eyebrow">Result Brief</p>
+            <h2>当前结果</h2>
+          </div>
+
+          <div class="status-grid">
+            <article class="status-card">
+              <p class="status-label">Session</p>
+              <p id="session-id" class="status-value muted">未创建</p>
+            </article>
+            <article class="status-card">
+              <p class="status-label">Status</p>
+              <p id="status-text" class="status-value muted">等待提交</p>
+            </article>
+          </div>
+
+          <div id="flash-message" class="flash is-hidden" role="alert"></div>
+
+          <article class="guide-surface">
+            <div id="empty-state" class="empty-state">
+              <p class="empty-title">还没有结果</p>
+              <p class="empty-copy">先在左侧输入旅游需求，页面会根据后端返回显示补充问题或攻略。</p>
+            </div>
+            <div id="guide-content" class="guide-content is-hidden"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
+
